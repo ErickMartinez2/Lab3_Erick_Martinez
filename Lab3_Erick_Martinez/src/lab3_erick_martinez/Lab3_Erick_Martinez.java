@@ -65,47 +65,23 @@ public class Lab3_Erick_Martinez {
                     System.out.println("Equipo Eliminado!");
                     break;
                 case 7:
+                    Comprar();
+                    break;
+                case 8:
+                    Organizar();
+                    break;
+                case 9:
                     System.out.println();
-                    System.out.println("-> Hacer Compras");
-                    System.out.println(" Equipos");
+                    System.out.println("-> Listar Equipos");
                     for (int i = 0; i < equipos.size(); i++) {
-                        System.out.println(i + ". " + equipos.get(i));
+                        System.out.println("- " + equipos.get(i));
                     }
-                    System.out.print("Ingrese el numero de su equipo: ");
-                    int Numero = sc.nextInt();
+                    break;
+                case 10:
                     System.out.println();
-                    System.out.println(" Jugadores");
+                    System.out.println("-> Listar Jugadores");
                     for (int i = 0; i < jugador.size(); i++) {
-                        if (jugador.get(i).getEstado() == 1) {
-                            System.out.println(i + ". " + jugador.get(i));
-                        }
-                    }
-                    System.out.print("Ingrese el numero del jugador: ");
-                    int Numero2 = sc.nextInt();
-                    System.out.print("Desea comprar el jugador? [s/n]");
-                    char resp = sc.next().charAt(0);
-                    if (resp == 's' || resp == 'S') {
-                        if (equipos.get(Numero).getPresupuesto() >= jugador.get(Numero2).getPrecio()) {
-                            double nuevo_presupuesto = equipos.get(Numero).getPresupuesto() - jugador.get(Numero2).getPrecio();
-                            equipos.get(Numero).setPresupuesto(nuevo_presupuesto);
-                            jugador.get(Numero2).setEstado(2);
-                            int contador, camiseta;
-                            do {
-                                contador = 0;
-                                System.out.print("Ingrese el numero de la camiseta del jugador: ");
-                                camiseta = sc.nextInt();
-                                for (int i = 0; i < equipos.get(Numero).getLista().size(); i++) {
-                                    if (equipos.get(Numero).getLista().get(i).getNumero() == camiseta) {
-                                        contador++;
-                                    }
-                                }
-                            } while (contador != 0);
-                            jugador.get(Numero2).setNumero(camiseta);
-                            equipos.get(Numero).getLista().add(jugador.get(Numero2));
-                            System.out.println("Compra Realizada!");
-                        } else {
-                            System.out.println("Fondos Insuficientes!");
-                        }
+                        System.out.println("- " + jugador.get(i));
                     }
                     break;
             }
@@ -436,6 +412,172 @@ public class Lab3_Erick_Martinez {
         int num4 = sc.nextInt();
         equipos.remove(num4);
     }
-    
-    
+
+    public static void Comprar() {
+        System.out.println();
+        System.out.println("-> Hacer Compras");
+        System.out.println(" Equipos");
+        for (int i = 0; i < equipos.size(); i++) {
+            System.out.println(i + ". " + equipos.get(i));
+        }
+        System.out.print("Ingrese el numero de su equipo: ");
+        int Numero = sc.nextInt();
+        System.out.println();
+        System.out.println(" Jugadores");
+        for (int i = 0; i < jugador.size(); i++) {
+            if (jugador.get(i).getEstado() == 1) {
+                System.out.println(i + ". " + jugador.get(i));
+            }
+        }
+        System.out.print("Ingrese el numero del jugador: ");
+        int Numero2 = sc.nextInt();
+        System.out.print("Desea comprar el jugador? [s/n]");
+        char resp = sc.next().charAt(0);
+        if (resp == 's' || resp == 'S') {
+            if (equipos.get(Numero).getPresupuesto() >= jugador.get(Numero2).getPrecio()) {
+                double nuevo_presupuesto = equipos.get(Numero).getPresupuesto() - jugador.get(Numero2).getPrecio();
+                equipos.get(Numero).setPresupuesto(nuevo_presupuesto);
+                jugador.get(Numero2).setEstado(2);
+                int contador, camiseta;
+                do {
+                    contador = 0;
+                    System.out.print("Ingrese el numero de la camiseta del jugador: ");
+                    camiseta = sc.nextInt();
+                    for (int i = 0; i < equipos.get(Numero).getLista().size(); i++) {
+                        if (equipos.get(Numero).getLista().get(i).getNumero() == camiseta) {
+                            contador++;
+                        }
+                    }
+                    if (contador != 0) {
+                        System.out.println("Numero de Camiseta Ocupado!");
+                    }
+                } while (contador != 0);
+                jugador.get(Numero2).setNumero(camiseta);
+                jugador.get(Numero2).setEquipo(equipos.get(Numero).getNombre());
+                equipos.get(Numero).getLista().add(jugador.get(Numero2));
+                System.out.println("Compra Realizada!");
+            } else {
+                System.out.println("Fondos Insuficientes!");
+            }
+        }
+    }
+
+    public static void Organizar() {
+        System.out.println();
+        System.out.println("-> Organizar Equipo");
+        System.out.println(" Equipos");
+        for (int i = 0; i < equipos.size(); i++) {
+            System.out.println(i + ". " + equipos.get(i));
+        }
+        System.out.print("Ingrese el numero de su equipo: ");
+        int Numero1 = sc.nextInt();
+        int cont_Delantero = 0,
+                cont_Medio = 0,
+                cont_Defensa = 0;
+        for (int i = 0; i < equipos.get(Numero1).getLista().size(); i++) {
+            if (equipos.get(Numero1).getLista().get(i) instanceof Delantero) {
+                cont_Delantero++;
+            } else {
+                if (equipos.get(Numero1).getLista().get(i) instanceof Medio) {
+                    cont_Medio++;
+                } else {
+                    if (equipos.get(Numero1).getLista().get(i) instanceof Defensa) {
+                        cont_Defensa++;
+                    }
+                }
+            }
+        }
+        if (equipos.get(Numero1).getLista().size() >= 11) {
+            int defensa = 0;
+            if (cont_Defensa != 0) {
+                int cont1 = 0;
+                do {
+                    System.out.print("Ingrese el numero de defensas: ");
+                    defensa = sc.nextInt();
+                    if (cont_Defensa >= defensa) {
+                        cont1++;
+                    } else {
+                        System.out.println("Defensas Insuficientes!");
+                    }
+                } while (cont1 == 0);
+            } else {
+                System.out.println("No tiene defensas!");
+            }
+            int medio = 0;
+            if (cont_Medio != 0) {
+                int cont1 = 0;
+                do {
+                    System.out.print("Ingrese el numero de medios: ");
+                    medio = sc.nextInt();
+                    if (cont_Medio >= medio) {
+                        cont1++;
+                    } else {
+                        System.out.println("Medios Insuficientes!");
+                    }
+                } while (cont1 == 0);
+            } else {
+                System.out.println("No tiene medios!");
+            }
+            int delantero = 0;
+            if (cont_Delantero != 0) {
+                int cont1 = 0;
+                do {
+                    System.out.print("Ingrese el numero de delanteros: ");
+                    delantero = sc.nextInt();
+                    if (cont_Delantero >= delantero) {
+                        cont1++;
+                    } else {
+                        System.out.println("Delantero Insuficientes!");
+                    }
+                } while (cont1 == 0);
+            } else {
+                System.out.println("No tiene delanteros!");
+            }
+            System.out.println(" Defensas");
+            for (int i = 0; i < equipos.get(Numero1).getLista().size(); i++) {
+                if (equipos.get(Numero1).getLista().get(i) instanceof Defensa) {
+                    System.out.println(i + ". " + equipos.get(Numero1).getLista().get(i));
+                }
+            }
+            for (int i = 0; i < defensa; i++) {
+                System.out.print("Ingrese el numero del defensa: ");
+                int def = sc.nextInt();
+                equipos.get(Numero1).getLista().get(def).setEstado(3);
+            }
+            System.out.println(" Medios");
+            for (int i = 0; i < equipos.get(Numero1).getLista().size(); i++) {
+                if (equipos.get(Numero1).getLista().get(i) instanceof Medio) {
+                    System.out.println(i + ". " + equipos.get(Numero1).getLista().get(i));
+                }
+            }
+            for (int i = 0; i < medio; i++) {
+                System.out.print("Ingrese el numero del medio: ");
+                int med = sc.nextInt();
+                equipos.get(Numero1).getLista().get(med).setEstado(3);
+            }
+            System.out.println(" Delanteros");
+            for (int i = 0; i < equipos.get(Numero1).getLista().size(); i++) {
+                if (equipos.get(Numero1).getLista().get(i) instanceof Delantero) {
+                    System.out.println(i + ". " + equipos.get(Numero1).getLista().get(i));
+                }
+            }
+            for (int i = 0; i < medio; i++) {
+                System.out.print("Ingrese el numero del delantero: ");
+                int del = sc.nextInt();
+                equipos.get(Numero1).getLista().get(del).setEstado(3);
+            }
+            System.out.println(" Portero");
+            for (int i = 0; i < equipos.get(Numero1).getLista().size(); i++) {
+                if (equipos.get(Numero1).getLista().get(i) instanceof Portero) {
+                    System.out.println(i + ". " + equipos.get(Numero1).getLista().get(i));
+                }
+            }
+            System.out.print("Ingrese el numero del portero: ");
+            int por = sc.nextInt();
+            equipos.get(Numero1).getLista().get(por).setEstado(3);
+            System.out.println("Organizacion Terminada!");
+        } else {
+            System.out.println("No tiene suficientes jugadores para organizar un equipo!");
+        }
+    }
 }
