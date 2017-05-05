@@ -46,6 +46,42 @@ public class Lab3_Erick_Martinez {
                     Modificar();
                     break;
                 case 3:
+                    System.out.println();
+                    System.out.println("-> Eliminar Jugador");
+                    System.out.println(" Jugadores");
+                    for (int i = 0; i < jugador.size(); i++) {
+                        System.out.println(i + ". " + jugador.get(i));
+                    }
+                    System.out.print("Ingrese el numero del jugador: ");
+                    int num = sc.nextInt();
+                    jugador.remove(num);
+                    break;
+                case 4:
+                    System.out.println();
+                    System.out.println("-> Crear Equipo");
+                    System.out.print("Ingrese el nombre: ");
+                    sc.nextLine();
+                    String nombre = sc.nextLine();
+                    System.out.print("Ingrese palmares: ");
+                    int palmares = sc.nextInt();
+                    System.out.print("Ingrese la ciudad: ");
+                    sc.nextLine();
+                    String ciudad = sc.nextLine();
+                    System.out.print("Ingrese el presupuesto: ");
+                    double presupuesto = sc.nextDouble();
+                    equipos.add(new Equipo(nombre, palmares, ciudad, presupuesto));
+                    break;
+                case 5:
+                    System.out.println();
+                    System.out.println("-> Eliminar Equipo");
+                    for (int i = 0; i < equipos.size(); i++) {
+                        System.out.println(i + ". " + equipos.get(i));
+                    }
+                    System.out.print("Ingrese el numero del equipo: ");
+                    int num2 = sc.nextInt();
+                    equipos.remove(num2);
+                    break;
+                case 6:
                     
                     break;
             }
