@@ -12,14 +12,14 @@ package lab3_erick_martinez;
 public class Delantero extends Jugadores {
     public int nivel_definicion;
     public double altura;
-    public int velocidad;
+    public double velocidad;
     public double promedio;
 
     public Delantero() {
         super();
     }
 
-    public Delantero(int nivel_definicion, double altura, int velocidad, double promedio, String nombre, String apellido, int edad, int estado, String pais, String pie, int numero, double precio, String equipo) {
+    public Delantero(int nivel_definicion, double altura, double velocidad, double promedio, String nombre, String apellido, int edad, int estado, String pais, String pie, int numero, double precio, String equipo) {
         super(nombre, apellido, edad, estado, pais, pie, numero, precio, equipo);
         this.nivel_definicion = nivel_definicion;
         this.altura = altura;
@@ -43,11 +43,11 @@ public class Delantero extends Jugadores {
         this.altura = altura;
     }
 
-    public int getVelocidad() {
+    public double getVelocidad() {
         return velocidad;
     }
 
-    public void setVelocidad(int velocidad) {
+    public void setVelocidad(double velocidad) {
         this.velocidad = velocidad;
     }
 

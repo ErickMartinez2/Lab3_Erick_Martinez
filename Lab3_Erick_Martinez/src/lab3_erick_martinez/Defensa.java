@@ -19,6 +19,14 @@ public class Defensa extends Jugadores {
         super();
     }
 
+    public Defensa(int nivel_agresividad, double altura, double peso, double velocidad, String nombre, String apellido, int edad, int estado, String pais, String pie, int numero, double precio, String equipo) {
+        super(nombre, apellido, edad, estado, pais, pie, numero, precio, equipo);
+        this.nivel_agresividad = nivel_agresividad;
+        this.altura = altura;
+        this.peso = peso;
+        this.velocidad = velocidad;
+    }
+
     public int getNivel_agresividad() {
         return nivel_agresividad;
     }

@@ -17,6 +17,12 @@ public class Portero extends Jugadores {
         super();
     }
 
+    public Portero(int nivel_aereo, int nivel_pies, String nombre, String apellido, int edad, int estado, String pais, String pie, int numero, double precio, String equipo) {
+        super(nombre, apellido, edad, estado, pais, pie, numero, precio, equipo);
+        this.nivel_aereo = nivel_aereo;
+        this.nivel_pies = nivel_pies;
+    }
+    
     public int getNivel_aereo() {
         return nivel_aereo;
     }
