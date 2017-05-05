@@ -61,6 +61,6 @@ public class Delantero extends Jugadores {
 
     @Override
     public String toString() {
-        return super.toString() + "Delantero{" + "nivel_definicion=" + nivel_definicion + ", altura=" + altura + ", velocidad=" + velocidad + ", promedio=" + promedio + '}';
+        return super.toString() + "\n-> Delantero{" + "\nNivel_Definicion=" + nivel_definicion + ", Altura=" + altura + "\nVelocidad=" + velocidad + ", Promedio=" + promedio + '}';
     }
 }

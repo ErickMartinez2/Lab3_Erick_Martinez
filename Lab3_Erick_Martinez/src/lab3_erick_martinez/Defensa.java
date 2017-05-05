@@ -61,7 +61,7 @@ public class Defensa extends Jugadores {
 
     @Override
     public String toString() {
-        return super.toString() + "Defensa{" + "nivel_agresividad=" + nivel_agresividad + ", altura=" + altura + ", peso=" + peso + ", velocidad=" + velocidad + '}';
+        return super.toString() + "\n-> Defensa{" + "\nNivel_Agresividad=" + nivel_agresividad + ", Altura=" + altura + "\nPeso=" + peso + ", Velocidad=" + velocidad + '}';
     }
     
     

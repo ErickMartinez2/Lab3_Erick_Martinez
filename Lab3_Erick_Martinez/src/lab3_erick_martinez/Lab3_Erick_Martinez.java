@@ -45,43 +45,75 @@ public class Lab3_Erick_Martinez {
                     System.out.println("Jugador Creado!");
                     break;
                 case 2:
-                    Modificar();
-                    System.out.println("Jugador Modificado!");
+                    if (!jugador.isEmpty()) {
+                        Modificar();
+                        System.out.println("Jugador Modificado!");
+                    } else {
+                        System.out.println("No hay jugadores para modificar!");
+                    }
                     break;
                 case 3:
-                    Eliminar();
-                    System.out.println("Jugador Eliminado!");
+                    if (!jugador.isEmpty()) {
+                        Eliminar();
+                        System.out.println("Jugador Eliminado!");
+                    } else {
+                        System.out.println("No hay jugadores para eliminar!");
+                    }
                     break;
                 case 4:
                     Crear2();
                     System.out.println("Equipo Creado!");
                     break;
                 case 5:
-                    Modificar2();
-                    System.out.println("Equipo Modificado!");
+                    if (!equipos.isEmpty()) {
+                        Modificar2();
+                        System.out.println("Equipo Modificado!");
+                    } else {
+                        System.out.println("No hay equipos que modificar!");
+                    }
                     break;
                 case 6:
-                    Eliminar2();
-                    System.out.println("Equipo Eliminado!");
+                    if (!equipos.isEmpty()) {
+                        Eliminar2();
+                        System.out.println("Equipo Eliminado!");
+                    } else {
+                        System.out.println("No hay equipos que eliminar!");
+                    }
                     break;
                 case 7:
-                    Comprar();
+                    if (!equipos.isEmpty() && !jugador.isEmpty()) {
+                        Comprar();
+                    } else {
+                        System.out.println("No hay suficientes equipos o jugadores para realizar una compra!");
+                    }
                     break;
                 case 8:
-                    Organizar();
+                    if (!equipos.isEmpty() && !jugador.isEmpty()) {
+                        Organizar();
+                    } else {
+                        System.out.println("No hay suficientes equipos o jugadores para organizar un equipo!");
+                    }
                     break;
                 case 9:
-                    System.out.println();
-                    System.out.println("-> Listar Equipos");
-                    for (int i = 0; i < equipos.size(); i++) {
-                        System.out.println("- " + equipos.get(i));
+                    if (!equipos.isEmpty()) {
+                        System.out.println();
+                        System.out.println("-> Listar Equipos");
+                        for (int i = 0; i < equipos.size(); i++) {
+                            System.out.println("- " + equipos.get(i));
+                        }
+                    } else {
+                        System.out.println("No hay equipos para listar!");
                     }
                     break;
                 case 10:
-                    System.out.println();
-                    System.out.println("-> Listar Jugadores");
-                    for (int i = 0; i < jugador.size(); i++) {
-                        System.out.println("- " + jugador.get(i));
+                    if (!jugador.isEmpty()) {
+                        System.out.println();
+                        System.out.println("-> Listar Jugadores");
+                        for (int i = 0; i < jugador.size(); i++) {
+                            System.out.println("- " + jugador.get(i));
+                        }
+                    }else{
+                        System.out.println("No hay suficientes jugadores para listar!");
                     }
                     break;
             }
@@ -110,6 +142,7 @@ public class Lab3_Erick_Martinez {
         System.out.println("2. Medio");
         System.out.println("3. Defensa");
         System.out.println("4. Portero");
+        System.out.print("Ingrese su opcion: ");
         int posicion = sc.nextInt();
         switch (posicion) {
             case 1:
@@ -170,6 +203,7 @@ public class Lab3_Erick_Martinez {
         }
         System.out.print("Ingrese el numero del jugador: ");
         int num = sc.nextInt();
+        System.out.println();
         System.out.println(" Informacion General");
         System.out.println("1. Nombre");
         System.out.println("2. Apellido");
@@ -214,7 +248,6 @@ public class Lab3_Erick_Martinez {
                 jugador.get(num).setPrecio(precio);
                 break;
             case 7:
-                System.out.println();
                 if (jugador.get(num) instanceof Delantero) {
                     System.out.println(" Delantero:");
                     System.out.println("1. Nivel de Definicion");
@@ -364,10 +397,11 @@ public class Lab3_Erick_Martinez {
         System.out.println();
         System.out.println("-> Modificacion Equipo");
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println(i + ". " + equipos.get(i));
+            System.out.println(i + ". " + equipos.get(i).getNombre());
         }
         System.out.print("Ingrese el numero del equipo: ");
         int num2 = sc.nextInt();
+        System.out.println();
         System.out.println(" Informacion General");
         System.out.println("1. Nombre");
         System.out.println("2. Palmares");
@@ -406,7 +440,7 @@ public class Lab3_Erick_Martinez {
         System.out.println();
         System.out.println("-> Eliminar Equipo");
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println(i + ". " + equipos.get(i));
+            System.out.println(i + ". " + equipos.get(i).getNombre());
         }
         System.out.print("Ingrese el numero del equipo: ");
         int num4 = sc.nextInt();
@@ -418,7 +452,7 @@ public class Lab3_Erick_Martinez {
         System.out.println("-> Hacer Compras");
         System.out.println(" Equipos");
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println(i + ". " + equipos.get(i));
+            System.out.println(i + ". " + equipos.get(i).getNombre());
         }
         System.out.print("Ingrese el numero de su equipo: ");
         int Numero = sc.nextInt();
@@ -467,7 +501,7 @@ public class Lab3_Erick_Martinez {
         System.out.println("-> Organizar Equipo");
         System.out.println(" Equipos");
         for (int i = 0; i < equipos.size(); i++) {
-            System.out.println(i + ". " + equipos.get(i));
+            System.out.println(i + ". " + equipos.get(i).getNombre());
         }
         System.out.print("Ingrese el numero de su equipo: ");
         int Numero1 = sc.nextInt();
