@@ -30,62 +30,87 @@ public class Lab3_Erick_Martinez {
             System.out.println("2. Modificar Jugador");
             System.out.println("3. Eliminar Jugador");
             System.out.println("4. Crear Equipo");
-            System.out.println("5. Eliminar Equipo");
-            System.out.println("6. Hacer Compras");
-            System.out.println("7. Organizar Equipo");
-            System.out.println("8. Listar Equipo");
-            System.out.println("9. Listar Jugadores");
-            System.out.println("10. Salir");
+            System.out.println("5. Modificar Equipo");
+            System.out.println("6. Eliminar Equipo");
+            System.out.println("7. Hacer Compras");
+            System.out.println("8. Organizar Equipo");
+            System.out.println("9. Listar Equipo");
+            System.out.println("10. Listar Jugadores");
+            System.out.println("11. Salir");
             System.out.print("Ingrese su opcion: ");
             opcion = sc.nextInt();
             switch (opcion) {
                 case 1:
                     Crear();
+                    System.out.println("Jugador Creado!");
                     break;
                 case 2:
                     Modificar();
+                    System.out.println("Jugador Modificado!");
                     break;
                 case 3:
-                    System.out.println();
-                    System.out.println("-> Eliminar Jugador");
-                    System.out.println(" Jugadores");
-                    for (int i = 0; i < jugador.size(); i++) {
-                        System.out.println(i + ". " + jugador.get(i));
-                    }
-                    System.out.print("Ingrese el numero del jugador: ");
-                    int num = sc.nextInt();
-                    jugador.remove(num);
+                    Eliminar();
+                    System.out.println("Jugador Eliminado!");
                     break;
                 case 4:
-                    System.out.println();
-                    System.out.println("-> Crear Equipo");
-                    System.out.print("Ingrese el nombre: ");
-                    sc.nextLine();
-                    String nombre = sc.nextLine();
-                    System.out.print("Ingrese palmares: ");
-                    int palmares = sc.nextInt();
-                    System.out.print("Ingrese la ciudad: ");
-                    sc.nextLine();
-                    String ciudad = sc.nextLine();
-                    System.out.print("Ingrese el presupuesto: ");
-                    double presupuesto = sc.nextDouble();
-                    equipos.add(new Equipo(nombre, palmares, ciudad, presupuesto));
+                    Crear2();
+                    System.out.println("Equipo Creado!");
                     break;
                 case 5:
+                    Modificar2();
+                    System.out.println("Equipo Modificado!");
+                    break;
+                case 6:
+                    Eliminar2();
+                    System.out.println("Equipo Eliminado!");
+                    break;
+                case 7:
                     System.out.println();
-                    System.out.println("-> Eliminar Equipo");
+                    System.out.println("-> Hacer Compras");
+                    System.out.println(" Equipos");
                     for (int i = 0; i < equipos.size(); i++) {
                         System.out.println(i + ". " + equipos.get(i));
                     }
-                    System.out.print("Ingrese el numero del equipo: ");
-                    int num2 = sc.nextInt();
-                    equipos.remove(num2);
-                    break;
-                case 6:
-                    
+                    System.out.print("Ingrese el numero de su equipo: ");
+                    int Numero = sc.nextInt();
+                    System.out.println();
+                    System.out.println(" Jugadores");
+                    for (int i = 0; i < jugador.size(); i++) {
+                        if (jugador.get(i).getEstado() == 1) {
+                            System.out.println(i + ". " + jugador.get(i));
+                        }
+                    }
+                    System.out.print("Ingrese el numero del jugador: ");
+                    int Numero2 = sc.nextInt();
+                    System.out.print("Desea comprar el jugador? [s/n]");
+                    char resp = sc.next().charAt(0);
+                    if (resp == 's' || resp == 'S') {
+                        if (equipos.get(Numero).getPresupuesto() >= jugador.get(Numero2).getPrecio()) {
+                            double nuevo_presupuesto = equipos.get(Numero).getPresupuesto() - jugador.get(Numero2).getPrecio();
+                            equipos.get(Numero).setPresupuesto(nuevo_presupuesto);
+                            jugador.get(Numero2).setEstado(2);
+                            int contador, camiseta;
+                            do {
+                                contador = 0;
+                                System.out.print("Ingrese el numero de la camiseta del jugador: ");
+                                camiseta = sc.nextInt();
+                                for (int i = 0; i < equipos.get(Numero).getLista().size(); i++) {
+                                    if (equipos.get(Numero).getLista().get(i).getNumero() == camiseta) {
+                                        contador++;
+                                    }
+                                }
+                            } while (contador != 0);
+                            jugador.get(Numero2).setNumero(camiseta);
+                            equipos.get(Numero).getLista().add(jugador.get(Numero2));
+                            System.out.println("Compra Realizada!");
+                        } else {
+                            System.out.println("Fondos Insuficientes!");
+                        }
+                    }
                     break;
             }
-        } while (opcion != 10);
+            System.out.println();
+        } while (opcion != 11);
     }
 
     public static void Crear() {
@@ -330,4 +355,87 @@ public class Lab3_Erick_Martinez {
                 break;
         }
     }
+
+    public static void Eliminar() {
+        System.out.println();
+        System.out.println("-> Eliminar Jugador");
+        System.out.println(" Jugadores");
+        for (int i = 0; i < jugador.size(); i++) {
+            System.out.println(i + ". " + jugador.get(i));
+        }
+        System.out.print("Ingrese el numero del jugador: ");
+        int num = sc.nextInt();
+        jugador.remove(num);
+    }
+
+    public static void Crear2() {
+        System.out.println();
+        System.out.println("-> Crear Equipo");
+        System.out.print("Ingrese el nombre: ");
+        sc.nextLine();
+        String nombre = sc.nextLine();
+        System.out.print("Ingrese palmares: ");
+        int palmares = sc.nextInt();
+        System.out.print("Ingrese la ciudad: ");
+        sc.nextLine();
+        String ciudad = sc.nextLine();
+        System.out.print("Ingrese el presupuesto: ");
+        double presupuesto = sc.nextDouble();
+        equipos.add(new Equipo(nombre, palmares, ciudad, presupuesto));
+    }
+
+    public static void Modificar2() {
+        System.out.println();
+        System.out.println("-> Modificacion Equipo");
+        for (int i = 0; i < equipos.size(); i++) {
+            System.out.println(i + ". " + equipos.get(i));
+        }
+        System.out.print("Ingrese el numero del equipo: ");
+        int num2 = sc.nextInt();
+        System.out.println(" Informacion General");
+        System.out.println("1. Nombre");
+        System.out.println("2. Palmares");
+        System.out.println("3. Ciudad");
+        System.out.println("4. Presupuesto");
+        System.out.print("Ingrese su opcion: ");
+        int num3 = sc.nextInt();
+        System.out.println();
+        switch (num3) {
+            case 1:
+                System.out.print("Ingrese el nombre: ");
+                sc.nextLine();
+                String nombre2 = sc.nextLine();
+                equipos.get(num2).setNombre(nombre2);
+                break;
+            case 2:
+                System.out.print("Ingrese palmares: ");
+                int palmares2 = sc.nextInt();
+                equipos.get(num2).setPalmares(palmares2);
+                break;
+            case 3:
+                System.out.print("Ingrese la ciudad: ");
+                sc.nextLine();
+                String ciudad2 = sc.nextLine();
+                equipos.get(num2).setCiudad(ciudad2);
+                break;
+            case 4:
+                System.out.print("Ingrese presupuesto: ");
+                double presupuesto2 = sc.nextInt();
+                equipos.get(num2).setPresupuesto(presupuesto2);
+                break;
+        }
+    }
+
+    public static void Eliminar2() {
+        System.out.println();
+        System.out.println("-> Eliminar Equipo");
+        for (int i = 0; i < equipos.size(); i++) {
+            System.out.println(i + ". " + equipos.get(i));
+        }
+        System.out.print("Ingrese el numero del equipo: ");
+        int num4 = sc.nextInt();
+        equipos.remove(num4);
+    }
+    
+    
 }
