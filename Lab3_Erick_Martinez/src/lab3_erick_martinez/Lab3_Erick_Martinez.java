@@ -112,8 +112,30 @@ public class Lab3_Erick_Martinez {
                         for (int i = 0; i < jugador.size(); i++) {
                             System.out.println("- " + jugador.get(i));
                         }
-                    }else{
+                    } else {
                         System.out.println("No hay suficientes jugadores para listar!");
+                    }
+                    break;
+                case 11:
+                    System.out.println();
+                    System.out.println("-> Titulares y Suplentes");
+                    System.out.println(" Equipos");
+                    for (int i = 0; i < equipos.size(); i++) {
+                        System.out.println(i + ". " + equipos.get(i).getNombre());
+                    }
+                    System.out.print("Ingrese el numero del equipo: ");
+                    int Equipo1 = sc.nextInt();
+                    System.out.println("Titulares:");
+                    for (int i = 0; i < equipos.get(Equipo1).getLista().size(); i++) {
+                        if (equipos.get(Equipo1).getLista().get(i).getEstado() == 3) {
+                            System.out.println(equipos.get(Equipo1).getLista().get(i));
+                        }
+                    }
+                    System.out.println("Suplentes:");
+                    for (int i = 0; i < equipos.get(Equipo1).getLista().size(); i++) {
+                        if (equipos.get(Equipo1).getLista().get(i).getEstado() != 3) {
+                            System.out.println(equipos.get(Equipo1).getLista().get(i));
+                        }
                     }
                     break;
             }
